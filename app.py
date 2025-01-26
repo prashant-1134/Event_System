@@ -123,7 +123,7 @@ load_dotenv()
 def runQuery(query):
 
     try:
-        db = mysql.connector.connect(host=os.getenv('DB_HOST') , database=os.getenv('DB_NAME'), user=os.getenv('DB_USER'), password=os.getenv('DB_PASSWORD'))
+        db = mysql.connector.connect(host='localhost' , database="event_mgmt", user="root", password='Manda#99')
         if db.is_connected():
             print("Connected to MySQL, running query: ", query)
             cursor = db.cursor(buffered = True)
@@ -148,4 +148,4 @@ def runQuery(query):
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0') 
+    app.run(debug=True) 
