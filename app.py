@@ -3,7 +3,8 @@ import datetime
 from mysql.connector import Error
 from flask import Flask, request, jsonify, render_template,redirect, url_for
 from random import randint
-
+import os
+from dotenv import load_dotenv
 
 app = Flask(__name__)
 
@@ -110,11 +111,19 @@ def renderParticipants():
 
     return render_template('participants.html',events = events)
 
+
+load_dotenv()
+
+# # Now you can access the variables
+# db_host = os.getenv('DB_USER')
+# print(db_host)  # This should print 'localhost' if set correctly
+
+
+
 def runQuery(query):
 
     try:
-        db = mysql.connector.connect( host='localhost',database='event_mgmt',user='root',password='Manda#99')
-
+        db = mysql.connector.connect(host=os.getenv('DB_HOST') , database=os.getenv('DB_NAME'), user=os.getenv('DB_USER'), password=os.getenv('DB_PASSWORD'))
         if db.is_connected():
             print("Connected to MySQL, running query: ", query)
             cursor = db.cursor(buffered = True)
